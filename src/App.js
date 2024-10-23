@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import './App.css';  // Add necessary styles in this file
+import './App.css';
 
 function App() {
   const [employeeData, setEmployeeData] = useState([]);
@@ -28,16 +28,16 @@ function App() {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentEmployees = employeeData.slice(indexOfFirstItem, indexOfLastItem);
 
-  // Handle pagination actions
+  // Handle pagination actions with better checks
   const handleNextPage = () => {
     if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
+      setCurrentPage((prevPage) => prevPage + 1);  // Use functional state update
     }
   };
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+      setCurrentPage((prevPage) => prevPage - 1);  // Use functional state update
     }
   };
 

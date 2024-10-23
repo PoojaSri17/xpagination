@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import './App.css';
+import './App.css';  // Add necessary styles in this file
 
 function App() {
   const [employeeData, setEmployeeData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
 
-  // Fetch data from API with error handling
+  // Fetch employee data with error handling
   useEffect(() => {
     axios
       .get("https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json")
@@ -20,15 +20,15 @@ function App() {
       });
   }, []);
 
-  // Calculate the total number of pages
+  // Calculate total pages
   const totalPages = Math.ceil(employeeData.length / itemsPerPage);
 
-  // Get current employees for pagination
+  // Determine the current employees to display
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentEmployees = employeeData.slice(indexOfFirstItem, indexOfLastItem);
 
-  // Pagination handlers
+  // Handle pagination actions
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
